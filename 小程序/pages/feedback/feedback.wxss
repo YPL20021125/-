@@ -1,0 +1,47 @@
+/* pages/yjfk/yjfk.wxss */
+.yjfk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20rpx;
+}
+
+.yjfkItem {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+}
+
+.yjfkItem text {
+  padding-right: 15rpx;
+  font-size: 29rpx;
+
+}
+
+.yjfkItem input {
+  width: 70%;
+  padding: 8rpx 15rpx;
+  border: 2rpx #3cc51f solid;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.yjBom {
+  display: flex;
+  width: 95%;
+  margin-top: 20rpx;
+}
+
+.yjBom text{
+  padding-right: 15rpx;
+  font-size: 29rpx;
+}
+
+.yjBom textarea{
+  width: 70%;
+  padding: 8rpx 15rpx;
+  border: 2rpx #3cc51f solid;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}

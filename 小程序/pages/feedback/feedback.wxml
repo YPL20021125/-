@@ -1,0 +1,16 @@
+<!--pages/feedback/feedback.wxml-->
+<!--pages/yjfk/yjfk.wxml-->
+<view class="yjfk">
+  <view class="yjfkItem">
+    <text>反馈标题</text>
+    <input type="text" placeholder="请输入标题" value="{{title}}" bindinput="getVal" data-typ="title"/>
+  </view>
+  <view class="yjBom">
+    <text>反馈内容</text>
+    <textarea value="{{content}}" placeholder="请输入反馈内容..." bindinput="getVal" data-typ="content"/>
+  </view>
+  <view style="margin-top: 80rpx;">
+    <button type="primary" bind:tap="subFk">提交反馈</button>
+  </view>
+</view>
+

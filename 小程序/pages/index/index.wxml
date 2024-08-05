@@ -1,0 +1,80 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <view style="display: flex;align-items: center;margin: 10rpx 0 30rpx 0;">
+      <view  class="xxItem">
+        <label>药单日期筛选</label>
+        <picker mode="date" value="{{date}}" bindchange="onXxDateChange">
+          <view class="picker-input">{{date || '选择日期'}}</view>
+        </picker>
+      </view>
+        <button style="margin-right: 10rpx;" size="mini" type="primary" bind:tap="onXxCz" data-type="1">查询</button>
+        <button size="mini" type="warn" bind:tap="onXxCz" data-type="2">重置</button>
+  </view>
+  <view class="medication-list">
+    <block wx:for="{{medications}}" wx:key="id">
+      <view class="medication-item" bindtap="showDetails" data-item="{{item}}">
+        <text class="medication-name">{{item.name}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="rich-text-container" style="height: {{isEditing?'800rpx':''}};" wx:if="{{showModal}}">
+  <scroll-view style="height: 100%;" scroll-y>
+    <view class="close-icon" bindtap="closeDetails">×</view>
+    <view wx:if="{{!isEditing}}">
+      <view class="modal-title">{{currentMedicationName}}</view>
+      <rich-text nodes="{{richTextDetails}}"></rich-text>
+    </view>
+    <view wx:if="{{isEditing}}" class="form-container">
+      <view class="input-group">
+        <label class="input-label">药品名称:</label>
+          <view class="picker-label" bind:tap="gotoSearch">{{currentMedication.name || '选择药品'}}</view>
+      </view>
+      <view class="input-group">
+        <label class="input-label">剂量:</label>
+        <input class="input" value="{{currentMedication.dosage}}" placeholder="留空自动填充默认值" bindinput="inputChange" data-param="dosage"/>
+      </view>
+      <view class="input-group">
+        <label class="input-label">频率:</label>
+        <picker mode="selector" value="{{currentMedication.frequencyIndex}}" range="{{frequencyOptions}}" bindchange="onFrequencyChange">
+          <view class="picker-input">{{currentMedication.frequency || '选择频率'}}</view>
+        </picker>
+      </view>
+      <view class="input-group" wx:for="{{currentMedication.frequency}}" wx:key="index">
+        <label class="input-label">第{{index+1}}次:</label>
+        <picker mode="selector" bindchange="onChangeTime" data-index="{{index}}" range="{{times}}"><!-- pickerRanges[index] -->
+          <view class="picker-input">{{currentMedication.next_dose_time[index] || '选择时间'}}</view>
+        </picker>
+      </view>
+      <view class="input-group">
+        <label class="input-label">开始日期:</label>
+        <picker mode="date" value="{{currentMedication.start_date}}" bindchange="onDateChange" data-param="start_date">
+          <view class="picker-input">{{currentMedication.start_date || '选择日期'}}</view>
+        </picker>
+      </view>
+      <view class="input-group">
+        <label class="input-label">结束日期:</label>
+        <picker mode="date" value="{{currentMedication.end_date}}" bindchange="onDateChange" data-param="end_date">
+          <view class="picker-input">{{currentMedication.end_date || '选择日期'}}</view>
+        </picker>
+      </view>
+      <view class="input-group">
+        <label class="input-label">库存剂量:</label>
+        <input class="input" value="{{currentMedication.taken_today}}" placeholder="示例：10" bindinput="inputChange" data-param="taken_today"/>
+      </view>
+      <view class="input-group">
+        <label class="input-label">备注:</label>
+        <textarea class="textarea" bindinput="inputChange" data-param="notes">{{currentMedication.notes}}</textarea>
+      </view>
+    </view>
+    <view class="button-container">
+      <button wx:if="{{!isEditing}}" bindtap="startEditing" class="action-button">修改</button>
+      <button wx:if="{{isEditing}}" bindtap="saveChanges" class="action-button">保存</button>
+      <button wx:if="{{!isEditing}}" bindtap="deleteMedication" class="action-button delete-button">删除</button>
+    </view>
+  </scroll-view>
+    
+  </view>
+
+  <button bindtap="showCreateForm" class="create-medication-button">创建新药单</button>
+</view>

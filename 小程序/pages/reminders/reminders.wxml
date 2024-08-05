@@ -1,0 +1,39 @@
+<calendar defaultDate="{{dateString}}" spot="{{spot}}" bind:dateChange="dateChange"></calendar>
+<view class="schedule-container">
+  <view class="schedule-title">服药计划</view>
+  <view style="text-align: center;padding: 15rpx;font-size: 26rpx; color: #999;">
+    <text>注:已服用可勾选☑️以减少库存</text>
+  </view>
+  <view class="table-header">
+    <view class="time-header">时间</view>
+    <view class="medication-header">     药物 - 单次剂量 - 库存剂量</view>
+  </view>
+  <view class="day-schedule">
+    <block wx:for="{{times}}" wx:for-index="time" wx:for-item="timeName" wx:key="time">
+      <view class="hour-row">
+        <view class="hour-time">{{timeName}}</view>
+        <view class="medications">
+          <block wx:for="{{todayMedications[time].names}}" wx:key="index">
+            <view class="medication-info" >
+              {{item}} - {{todayMedications[time].dosage[index]}} - {{todayMedications[time].taken_today[index]<=0 ?'库存不足':todayMedications[time].taken_today[index]}}
+              <checkbox-group 
+              style="margin-left: 20rpx;"
+              wx:if="{{todayMedications[time].taken_today[index]>0 && date==dateString}}"
+              bindchange="checkboxChange" data-id="{{todayMedications[time].ids[index]}}" data-dosage="{{todayMedications[time].dosage[index]}}">
+              <checkbox  value="6666" />
+            </checkbox-group>
+              </view>
+              
+          </block>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="rich-text-container" wx:if="{{showModal}}">
+    <view class="modal-header">
+      <view class="modal-title">{{currentMedicationName}}</view>
+      <view class="close-icon" bindtap="closeDetails">×</view>
+    </view>
+    <rich-text nodes="{{richTextDetails}}"></rich-text>
+  </view>
+</view>

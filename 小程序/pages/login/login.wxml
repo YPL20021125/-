@@ -1,0 +1,14 @@
+<!-- pages/login/login.wxml -->
+<view class="container">
+  <view class="logo">
+    <image src="6673747_care_doctor_health_healthcare_history_icon.png" mode="aspectFit"></image>
+  </view>
+  <view class="input-group">
+    <input class="input" type="text" placeholder="请输入手机号" bindinput="inputPhone" />
+    <input class="input" type="password" placeholder="请输入密码" bindinput="inputPassword" />
+  </view>
+  <button class="login-button" bindtap="manualLogin">登录/注册</button>
+  <view class="link-group" wx:if="{{flag}}">
+    <navigator  url="/pages/forgetPassword/forgetPassword?phone={{phone}}" class="forget-password">忘记密码？</navigator>
+  </view>
+</view>

@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="search-button">
+    <button bindtap="goToDrugSearch">搜索药物信息</button>
+  </view>
+  <view class="divider"></view>  <!-- 分隔线 -->
+  <view class="search-button">
+    <button bindtap="goToStoreSearch">搜索周边药店</button>
+  </view>
+</view>
+
+
+
